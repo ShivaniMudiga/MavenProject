@@ -22,4 +22,48 @@ then right click on the project
 you should see Hello World ! in the console 
 
 
+to run this maven project in jenkins :
+
+click on new item 
+give a name to the pipeline 
+select discard old builds
+add this as the pipeline script 
+pipeline {
+    agent any
+    tools{
+        jdk 'jdk11'
+        maven 'maven3'
+    }
+    stages {
+        stage('git repo & clean') {
+            steps {
+                bat "rmdir /s /q Harshitha_Jenkins_Maven || exit 0"
+                bat "git clone https://github.com/ShivaniMudiga/MavenProject.git"
+                bat "mvn clean -f MavenProject/pom.xml"
+            }
+        }
+        stage('install') {
+            steps {
+                bat "mvn install -f MavenProject/pom.xml" 
+            }
+        }
+        stage('test') {
+            steps {
+                bat "mvn test -f MavenProject/pom.xml"
+            }
+        }
+        stage('package') {
+            steps {
+                bat "mvn package -f MavenProject/pom.xml"
+            }
+        }
+    }
+}
+
+if build fails 
+go to manage jenkins > tools
+jdk installation add jdk name : jdkll select automatic imstallation
+maven installation add maven name : maven3 select automatic installations
+
+
 
