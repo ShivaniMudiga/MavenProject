@@ -65,5 +65,20 @@ go to manage jenkins > tools
 jdk installation add jdk name : jdkll select automatic imstallation
 maven installation add maven name : maven3 select automatic installations
 
+to add webhooks to the jenkins pipeline 
+first we need ngrok
+open docker 
+oepn git bash
+    docker pull ngrok/ngrok:latest
+    docker run --rm -it -e NGROK_AUTHTOKEN=35jIqCGkvnt29rTLXjVUCnNz29x_4uR9Q3HPL8QVSR6MRRiGV -p 4040:4040 ngrok/ngrok:latest http host.docker.internal:8080
+here you will get one link called forward https:...................dev
+copy that 
+open git repo setting>webhooks 
+add webhook 
+payload :    https://(NEW-NGROK-URL.ngrok-free.dev - you will get this kind of link when you run ngrok)/github-webhook/
+content-type: application json 
+in jenkins > configure > select github hook trigger 
+
+
 
 
