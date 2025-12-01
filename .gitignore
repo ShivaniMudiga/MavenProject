@@ -14,7 +14,8 @@ open terminal > click on small blue - white box > choose local terminal > change
 > mvn clean 
 >mvn install
 >mvn package 
-
+> mvn clean package (will create .jar file for )
+after running it check for .jar file in the target folder 
 you should get build succes in all
 then right click on the project 
 > run as > java Application > App > ok >proceed 
