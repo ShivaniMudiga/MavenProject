@@ -4,3 +4,21 @@ target/
 *.log
 *.iml
 .DS_Store
+
+
+open eclipse 
+click on file > import > project from git >clone uri >give uri > choose any directory >
+import existing Eclipse projects > finish 
+
+open terminal > click on small blue - white box > choose local terminal > change the directory to your project directory >
+> mvn clean 
+>mvn install
+>mvn package 
+
+you should get build succes in all
+then right click on the project 
+> run as > java Application > App > ok >proceed 
+you should see Hello World ! in the console 
+
+
+
