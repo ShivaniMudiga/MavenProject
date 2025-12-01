@@ -99,3 +99,13 @@ docker rmijasonrivers/nagios:latest
 
 
 
+minikube start (start cluster)
+minikube kubectl -- create deployment mynginx --image=nginx
+minikube kubectl -- get pods / minikube kubectl -- get deployments
+minikube kubectl -- expose deployment mynginx --type=NodePort --port=80
+minikube service mynginx --url → open in browser (or use kubectl port-forward svc/mynginx 8081:80)
+Update: kubectl set image deployment/mynginx nginx=nginx:latest
+Scale: kubectl scale deployment mynginx --replicas=4
+Debug: kubectl get pods, kubectl describe pods
+Cleanup: kubectl delete deployment mynginx and kubectl delete service mynginx
+(then optionally minikube stop or minikube delete)
