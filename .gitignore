@@ -65,19 +65,7 @@ go to manage jenkins > tools
 jdk installation add jdk name : jdkll select automatic imstallation
 maven installation add maven name : maven3 select automatic installations
 
-to add webhooks to the jenkins pipeline 
-first we need ngrok
-open docker 
-oepn git bash
-    docker pull ngrok/ngrok:latest
-    docker run --rm -it -e NGROK_AUTHTOKEN=35jIqCGkvnt29rTLXjVUCnNz29x_4uR9Q3HPL8QVSR6MRRiGV -p 4040:4040 ngrok/ngrok:latest http host.docker.internal:8080
-here you will get one link called forward https:...................dev
-copy that 
-open git repo setting>webhooks 
-add webhook 
-payload :    https://(NEW-NGROK-URL.ngrok-free.dev - you will get this kind of link when you run ngrok)/github-webhook/
-content-type: application json 
-in jenkins > configure > select github hook trigger 
+
 
 
 Nagios Automation Steps
@@ -109,3 +97,111 @@ Scale: kubectl scale deployment mynginx --replicas=4
 Debug: kubectl get pods, kubectl describe pods
 Cleanup: kubectl delete deployment mynginx and kubectl delete service mynginx
 (then optionally minikube stop or minikube delete)
+
+
+to add webhooks to the jenkins pipeline 
+NGROK
+Get your auth token from dashboard.
+Run in ngrok terminal:
+ngrok config add-authtoken <your_token>
+ngrok http 8888(copy url)
+Open GitHub → Repo → Settings → Webhooks → Add Webhook
+Payload URL:
+https://your-ngrok-url/github-webhook/
+Content type: application/json
+Jenkins Dashboard → Select your job → Configure
+Build Triggers → enable:
+GitHub hook trigger for GITScm polling
+
+---
+GMAIL
+Go to Security → App Passwords
+App: Other
+Name: Jenkins-Demo
+Generate → copy 16-digit password.
+Configure Jenkins Email Settings
+Manage Jenkins → Configure System
+
+A. Email Notification
+SMTP Server: smtp.gmail.com
+Use SMTP Auth: enabled
+Username: sarvikashetty30@gmail.com
+Password: 16-digit App Password
+Use SSL: enabled
+SMTP Port: 465
+Reply-To: sarvikashetty30@gmail.com
+
+B. Extended Email Notification
+SMTP Server: smtp.gmail.com
+SMTP Port: 465
+Use SSL: enabled
+Credentials: Gmail + App Password
+Content type: text/html
+
+Configure Job-level Email Notification
+Job → Configure → Post-build Actions
+Add: Editable Email Notification
+Recipient list: somisettysarvika@gmail.com
+Triggers:Always
+---
+
+Project Title: Gen AI in Education - Personalized Quiz and Content Generator 
+Using LLM. 
+• Abstract: This project develops an AI-based system that uses Large Language 
+Models (LLMs) to generate personalized quizzes and tests from educational content. 
+It adapts questions to each student’s learning level and performance, providing 
+instant feedback and explanations. The system helps educators track progress and 
+tailor instruction, enhancing learning outcomes through intelligent assessment. 
+• Functional Requirements: 
+a. User Registration & Authentication: Students, teachers, and admins can 
+register and log in securely. 
+b. Content Upload: Teachers can upload educational materials (PDFs, notes, 
+transcripts). 
+c. Content Processing: The system extracts key concepts from uploaded 
+content using LLM. 
+d. Personalized Quiz Generation: LLM generates quizzes tailored to each 
+student’s learning profile and content. 
+e. Quiz Attempt and Submission: Students can take quizzes and submit 
+answers through the platform. 
+f. 
+Feedback Generation: The system provides instant feedback and 
+explanations for each question. 
+g. Performance Tracking: Student scores, accuracy, and progress are stored and 
+visualized. 
+h. Teacher Dashboard: Teachers can view student analytics and quiz content. 
+i. 
+Admin Controls: Admins can manage users, content repositories, and LLM 
+configuration. 
+j. 
+LLM API Integration: The system connects to external LLM services (e.g., 
+OpenAI API) for generational tasks. 
+• Non-Functional Requirements: 
+1. Usability: The interface should be user-friendly and intuitive for all users. 
+2. Performance: Quiz generation time should be under 5 seconds. 
+3. Scalability: The system should support 1,000+ concurrent users. 
+4. Security: All data should be encrypted; authentication must be secure. 
+5. Availability: The system should have at least 99.9% uptime. 
+6. Maintainability: Codebase should be modular and well-documented for 
+future updates. 
+7. Compatibility: Must work on desktops, tablets, and smartphones. 
+• Use Cases: 
+1. User Registration and Login: Users (students, teachers, admins) create 
+accounts and securely log in. 
+2. Content Upload: Teachers upload educational materials such as PDFs, notes, 
+and transcripts. 
+3. Content Processing: The system processes uploaded content to extract key 
+concepts using LLM. 
+4. Personalized Quiz Generation: The system generates quizzes tailored to each 
+student’s learning progress and content. 
+5. Quiz Attempt: Students take personalized quizzes within the platform. 
+6. Instant Feedback and Explanation: After quiz submission, students receive 
+AI-generated feedback and detailed explanations. 
+7. Performance Tracking: The system records student quiz scores and tracks 
+progress over time. 
+8. Teacher Analytics Dashboard: Teachers view student performance reports 
+and quiz results. 
+9. Quiz Review and Approval: Teachers can review and edit AI-generated 
+quizzes before assigning them. 
+10. User Management: Admins manage users, roles, and access permissions. 
+11. System and LLM Configuration: Admins configure LLM settings and 
+integration parameters.
