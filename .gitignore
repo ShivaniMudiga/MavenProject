@@ -145,6 +145,87 @@ Recipient list: somisettysarvika@gmail.com
 Triggers:Always
 ---
 
+
+Docker Redis :
+docker pull redis
+docker run --name myredis -d -p 6379:6379 redis
+docker ps
+docker exec -it myredis redis-cli
+(above command will open redis erminal like this )
+127.0.0.1:637> here you run the folling commands 
+SET name "Shivani"
+GET name 
+DEL name 
+
+mkdir -p /c/DockerProjects/Redis
+cd /c/DockerProjects/Redis
+nano Dockerfile
+FROM redis:latest
+CMD ["redis-server"]
+
+# 1. Build image
+docker build -t redisnew .
+
+# 2. Run container
+docker run --name myredisnew -d redisnew
+
+# 3. Show running containers
+docker ps
+
+# 4. Stop container
+docker stop myredisnew
+
+# 5. Login to Docker Hub
+docker login
+
+# 6. Show all containers
+docker ps -a
+
+# 7. Commit container → new image (use your container ID here)
+# Replace <CONTAINER_ID> with actual ID from docker ps -a
+docker commit <CONTAINER_ID> yourdockerhubusername/redis1
+
+# 8. List all images
+docker images
+
+# 9. Push to Docker Hub
+docker push yourdockerhubusername/redis1
+
+# 10. Remove container (replace with actual ID)
+docker rm <CONTAINER_ID>
+
+# 11. Remove image
+docker rmi yourdockerhubusername/redis1
+
+# 12. Check containers again
+docker ps -a
+
+# 13. Logout of Docker Hub
+docker logout
+
+# 14. Pull image back
+docker pull yourdockerhubusername/redis1
+
+# 15. Run a new container using pulled image
+docker run --name myredis -d yourdockerhubusername/redis1
+
+# 16. Enter Redis CLI
+docker exec -it myredis redis-cli
+
+# Inside Redis CLI:
+# ==================
+# SET name "Abcdef"
+# GET name
+# exit
+
+# 20. Show container status again
+docker ps -a
+
+# 21. Stop container
+docker stop myredis
+
+
+
 Project Title: Gen AI in Education - Personalized Quiz and Content Generator 
 Using LLM. 
 • Abstract: This project develops an AI-based system that uses Large Language 
@@ -205,3 +286,4 @@ quizzes before assigning them.
 10. User Management: Admins manage users, roles, and access permissions. 
 11. System and LLM Configuration: Admins configure LLM settings and 
 integration parameters.
+
